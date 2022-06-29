@@ -16,7 +16,7 @@ export default defineConfig({
     alias: {
       // 配置路径别名， __dirname表示当前路径
       '@': path.resolve(__dirname, 'src'),
-      'com': path.resolve(__dirname, 'src/components')
+      'com': path.resolve(__dirname, 'src/components'),
     }
   },
   plugins: [

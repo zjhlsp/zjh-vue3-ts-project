@@ -2,7 +2,8 @@
   <div class="common-layout">
     <el-container>
       <el-aside width="200px">
-        Aside
+        <side-bar />
+        <MenuBar />
       </el-aside>
       <el-container>
         <el-header>Header</el-header>
@@ -14,7 +15,8 @@
 
 
 <script setup lang="ts">
-
+import SideBar from './components/LogoBar/index.vue'
+import MenuBar from './components/MenuBar/index.vue'
 </script>
 
 <style lang="scss">
