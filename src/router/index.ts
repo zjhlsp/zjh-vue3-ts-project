@@ -1,10 +1,10 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
-        component: () => import('@/components/DefaultProps.vue')
-    },
+        component: () => import('@/layout/index.vue')
+    }
 ]
 // const routes: RouteRecordRaw[]= [
 //     {
