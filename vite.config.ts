@@ -16,7 +16,16 @@ export default defineConfig({
     alias: {
       // 配置路径别名， __dirname表示当前路径
       '@': path.resolve(__dirname, 'src'),
-      'com': path.resolve(__dirname, 'src/components'),
+      'com': path.resolve(__dirname, 'src/components')
+    }
+  },
+  css:{
+    //css预处理
+    preprocessorOptions:{
+      scss:{
+        //引入varibles.scss全局预定义变量
+        additionalData:'@import "./src/styles/variables.scss";'
+      }
     }
   },
   plugins: [
