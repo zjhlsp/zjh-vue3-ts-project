@@ -2,23 +2,14 @@
   <div class="common-layout">
     <el-container>
       <el-aside :width="collapsed ? 'auto' : '200px'">
-        <logoBar
-          :collapsed="collapsed"
-        />
-        <MenuBar
-          :collapsed="collapsed"
-        />
+        <logoBar :collapsed="collapsed" />
+        <MenuBar :collapsed="collapsed" />
       </el-aside>
       <el-container>
         <el-header>
           <el-row>
-            <el-icon
-              style="font-size: 16px;"
-              @click="() => {collapsed= !collapsed}"
-            >
-              <component
-                :is="collapsed ? Expand : Fold"
-              />
+            <el-icon style="font-size: 20px;" @click="() => { collapsed = !collapsed }">
+              <component :is="collapsed ? Expand : Fold" />
             </el-icon>
           </el-row>
         </el-header>
@@ -40,17 +31,20 @@ const collapsed = ref<boolean>(false)
 
 <style lang="scss">
 .common-layout {
-    height: 100vh;
-    display: flex;
-}
-
-.el-aside {
-  overflow: hidden;
-  border: none;
-}
-
-.el-header {
+  height: 100vh;
   display: flex;
-  align-items: center;
+  overflow: hidden;
+
+  .el-aside {
+    overflow: hidden;
+    border: none;
+    height: 100%;
+  }
+
+  .el-header {
+    display: flex;
+    align-items: center;
+    background-color: $lightGray;
+  }
 }
 </style>

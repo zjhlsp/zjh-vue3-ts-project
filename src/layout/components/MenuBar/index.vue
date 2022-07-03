@@ -1,85 +1,226 @@
 <template>
   <el-menu
-    active-color="#409EFF"
+    default-active="2"
+    active-text-color="#409EFF"
     text-color="#fff"
-    default-active="1"
     class="el-menu"
     :collapse="collapsed"
   >
-    <el-sub-menu index="1">
-      <template #title>
-        <el-icon><location /></el-icon>
-        <span>Navigator One</span>
-      </template>
-      <el-menu-item-group>
-        <template #title>
-          <span>Group One</span>
-        </template>
-        <el-menu-item index="1-1">
-          item one
-        </el-menu-item>
-        <el-menu-item index="1-2">
-          item two
-        </el-menu-item>
-      </el-menu-item-group>
-      <el-menu-item-group title="Group Two">
-        <el-menu-item index="1-3">
-          item three
-        </el-menu-item>
-      </el-menu-item-group>
-      <el-sub-menu index="1-4">
-        <template #title>
-          <span>item four</span>
-        </template>
-        <el-menu-item index="1-4-1">
-          item one
-        </el-menu-item>
-      </el-sub-menu>
-    </el-sub-menu>
-    <el-menu-item index="2">
-      <el-icon><icon-menu /></el-icon>
-      <template #title>
-        Navigator Two
-      </template>
-    </el-menu-item>
-    <el-menu-item
-      index="3"
-      disabled
-    >
-      <el-icon><document /></el-icon>
-      <template #title>
-        Navigator Three
-      </template>
-    </el-menu-item>
-    <el-menu-item index="4">
-      <el-icon><setting /></el-icon>
-      <template #title>
-        Navigator Four
-      </template>
-    </el-menu-item>
+    <menu-item :menus="menus" />
   </el-menu>
 </template>
 
 <script lang="ts" setup>
-import {
-  Document,
-  Menu as IconMenu,
-  Location,
-  Setting
-} from '@element-plus/icons-vue'
+import { reactive } from 'vue';
+import MenuItem from './MenuItem.vue'
+
+
+
 
 defineProps({
-    collapsed: {
+  collapsed: {
     type: Boolean
-    }
+  }
 })
+
+const menus = reactive([
+  {
+    path: '/',
+    redirect: '/index',
+    name: 'Index',
+    meta: {
+      title: '首页',
+      icon: 'house'
+    },
+    children: [
+      {
+        path: 'index',
+        name: 'Index',
+
+        meta: {
+          title: '首页',
+          icon: 'house'
+
+        }
+      }
+    ]
+  },
+  {
+    path: '/user',
+    redirect: '/user',
+    name: 'User',
+    meta: {
+      title: '用户管理',
+      affix: true,
+      icon: 'UserFilled'
+    },
+    children: [
+      {
+        path: 'manger',
+        name: 'UserManger',
+
+        meta: {
+          title: '用户管理',
+          icon: 'UserFilled'
+
+        }
+      }
+    ]
+  }, {
+    path: '/store',
+    redirect: '/store',
+    name: 'Store',
+    meta: {
+          title: '门店管理',
+          icon: 'LocationInformation'
+
+        },
+    children: [
+      {
+        path: 'index',
+        name: 'Index',
+
+        meta: {
+          title: '门店管理',
+          icon: 'LocationInformation'
+
+        }
+      }
+    ]
+  },
+  {
+    path: '/order',
+    name: 'Order',
+    meta: {
+      title: '订单管理',
+      icon: 'Notebook',
+      roles: ['admin', 'editor']
+    },
+    children: [
+      {
+        path: 'orderQuery',
+        name: 'orderQuery',
+
+        meta: {
+          title: '订单查询',
+          icon: 'Notification'
+        }
+      },
+      {
+        path: 'orderAction',
+        name: 'orderAction',
+
+        meta: {
+          title: '订单处理',
+          icon: 'Money'
+        }
+      }
+    ]
+  }, {
+    path: '/good',
+    name: 'good',
+
+    meta: {
+      title: '商品管理',
+      icon: 'TakeawayBox'
+    },
+    children: [
+      {
+        path: 'category',
+        name: 'category',
+
+        meta: {
+          title: '商品种类',
+          icon: 'ShoppingBag'
+        }
+      },
+      {
+        path: 'goodQuery',
+        name: 'goodQuery',
+
+        meta: {
+          title: '商品查询',
+          icon: 'SoldOut'
+        }
+      }
+    ]
+  },
+
+  {
+    path: '/system',
+    name: 'system',
+
+    meta: {
+      title: 'system',
+      icon: 'Wallet',
+      roles: ['admin', 'editor']
+    },
+    children: [
+      {
+        path: 'account',
+        name: 'account',
+
+        meta: {
+          title: 'account',
+          icon: 'User',
+          roles: ['editor']
+        }
+
+      },
+      {
+        path: 'group',
+        name: 'group',
+
+        meta: {
+          title: 'group',
+          icon: 'Refrigerator',
+          roles: ['admin']
+        }
+      }, {
+        path: 'task',
+        name: 'task',
+
+        meta: {
+          title: 'account',
+          icon: 'Clock',
+          roles: ['editor']
+        }
+
+      },
+      {
+        path: 'Setting',
+        name: 'Setting',
+
+        meta: {
+          title: '系统设置',
+          icon: 'Setting',
+          roles: ['admin']
+        }
+      }
+    ]
+
+  }
+
+])
 
 </script>
 
 <style lang="scss">
 .el-menu {
+  border: none;
+  background-color: $menuBg;
   height: 100%;
+
+}
+</style>
+
+
+<!-- <style lang="scss">
+.el-menu {
+  height: 100vh;
+  width: 200px;
+  min-height: 400px;
   background-color: $menuBg;
   overflow: hidden;
 }
-</style>
+</style> -->

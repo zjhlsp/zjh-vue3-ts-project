@@ -1,17 +1,16 @@
 <template>
   <div
     class="logo"
-    :style="collapsed ? 'width: 64px' : ''"
   >
     <img
       src="@/assets/JOE.png"
     >
-    <h2
+    <span
       v-show="!collapsed"
       class="title"
     >
       JOE
-    </h2>
+    </span>
   </div>
 </template>
 
@@ -29,20 +28,18 @@ defineProps({
 .logo {
   display:flex;
   align-items:center;
-  width: auto;
   height: 64px;
   overflow: hidden;
   white-space: nowrap;
+  background-color: $lightGray;
   img {
     height: 64px;
     width: 64px;
   }
-}
-
-.title {
-  background-color: $menuBg;
+  .title {
+  // background-color: $menuBg;
   display: flex;
-  color: #fff;
+  color: black;
   width: 100%;
   height: 100%;
   font-size: 24px;
@@ -50,4 +47,7 @@ defineProps({
   align-items: center;
   // width: 200px
 }
+}
+
+
 </style>
