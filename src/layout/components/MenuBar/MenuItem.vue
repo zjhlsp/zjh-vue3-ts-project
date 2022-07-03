@@ -19,6 +19,7 @@
     <el-menu-item
       v-else
       :index="menu.path"
+      @click="toPath(menu.name)"
     >
       <el-icon>
         <component :is="menu.meta.icon" />
@@ -29,8 +30,14 @@
 </template>
 
 <script setup lang='ts'>
+import { useRouter } from 'vue-router';
+
 
     defineProps(['menus'])
+    const route = useRouter()
+    const toPath = (item:string) => {
+      route.push({name: item})
+    }
 </script>
 <style lang='scss' scoped>
 </style>

@@ -8,12 +8,16 @@
       <el-container>
         <el-header>
           <el-row>
-            <el-icon style="font-size: 20px;" @click="() => { collapsed = !collapsed }">
+            <el-icon
+              style="font-size: 20px; margin-right: 16px;"
+              @click="() => { collapsed = !collapsed }"
+            >
               <component :is="collapsed ? Expand : Fold" />
             </el-icon>
+            <HeaderBar style="margin-top: 3px;" />
           </el-row>
         </el-header>
-        <el-main>Main</el-main>
+        <el-main><AppMain /></el-main>
       </el-container>
     </el-container>
   </div>
@@ -23,7 +27,9 @@
 <script setup lang="ts">
 import logoBar from './components/LogoBar/index.vue'
 import MenuBar from './components/MenuBar/index.vue'
+import HeaderBar from './components/HeaderBar/index.vue'
 import { Expand, Fold } from '@element-plus/icons-vue';
+import AppMain from './AppMain/AppMain.vue';
 import { ref } from 'vue';
 
 const collapsed = ref<boolean>(false)
