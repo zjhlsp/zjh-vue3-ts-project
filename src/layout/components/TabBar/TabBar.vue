@@ -21,7 +21,7 @@
 <script setup lang='ts'>
 
 import { Itab } from '@/store/type'
-import { computed, ref, watch, onMounted } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 const route = useRoute()
@@ -31,23 +31,11 @@ const tabsList = computed(() => {
   return store.getters.getAddTabs
 })
 
-//监听路由
-watch(() => route.path, () => {
-  activeKey.value = route.path
-  addTab()
-})
 
-onMounted(() => {
-  addTab()
-  activeKey.value = route.path
-  // 初始化tabsList
-  refresh()
-
-})
 // tabs索引 当前路由
 const activeKey = ref('')
 
-//路由跳转的时候添加tab选项
+//路由跳转的时候添加tab选项的方法
 const addTab = () => {
   const { path, meta } = route
   const tab: Itab = {
@@ -57,10 +45,33 @@ const addTab = () => {
   store.commit('addTab', tab)
 }
 
+const refresh = () => {
+  // 监听浏览器刷新事件，session中存入tablist
+  window.addEventListener('beforeunload', () => {
+    sessionStorage.setItem('TABS_ROUTERS', JSON.stringify(tabsList.value))
+  })
+
+ // 取出session中的tabsList
+  let session = sessionStorage.getItem('TABS_ROUTERS')
+  if (session) {
+    JSON.parse(session).forEach((item:Itab) => {
+      store.commit('addTab', item)
+    });
+  }
+}
+
+// 先刷新tabslist
+refresh()
+
+//再监听路由
+watch(() => route.path, () => {
+  addTab()
+  activeKey.value = route.path
+},{immediate: true})
+
 const handleClick = (event:any) => {
   const tabClick = event.props.name
   router.push({ path: tabClick })
-
 }
 
 const handleRemove = (event: string) => {
@@ -83,20 +94,7 @@ const handleRemove = (event: string) => {
 
 }
 
-const refresh = () => {
-  // 监听浏览器刷新事件，session中存入tablist
-  window.addEventListener('beforeunload', () => {
-    sessionStorage.setItem('TABS_ROUTERS', JSON.stringify(tabsList.value))
-  })
 
- // 取出session中的tabsList
-  let session = sessionStorage.getItem('TABS_ROUTERS')
-  if (session) {
-    JSON.parse(session).forEach((item:Itab) => {
-      store.commit('addTab', item)
-    });
-  }
-}
 
 
 </script>
