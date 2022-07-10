@@ -17,7 +17,10 @@
             <HeaderBar style="margin-top: 3px;" />
           </el-row>
         </el-header>
-        <el-main><AppMain /></el-main>
+        <el-main>
+          <TabBar />
+          <AppMain />
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -31,6 +34,7 @@ import HeaderBar from './components/HeaderBar/index.vue'
 import { Expand, Fold } from '@element-plus/icons-vue';
 import AppMain from './AppMain/AppMain.vue';
 import { ref } from 'vue';
+import TabBar from './components/TabBar/TabBar.vue'
 
 const collapsed = ref<boolean>(false)
 </script>
