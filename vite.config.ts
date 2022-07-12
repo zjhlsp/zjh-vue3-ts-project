@@ -9,7 +9,17 @@ export default defineConfig({
   // node服务
   server: {
     // 端口
-    port: 8080
+    port: 3000,
+    proxy: {
+      '/api': {
+        // 后端 URL，它会追加到属性名配置的 /api 这个片段的前面 => http://106.52.235.252:8101/api
+        target: 'http://106.52.235.252:8101/',
+        // 允许跨域
+        changeOrigin: true,
+        // 重写：将/api去掉
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
   },
   resolve: {
     // 配置别名

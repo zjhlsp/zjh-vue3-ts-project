@@ -24,6 +24,8 @@ import { Itab } from '@/store/type'
 import { computed, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
+import { ElMessage } from 'element-plus'
+
 const route = useRoute()
 const store = useStore()
 const router = useRouter()
