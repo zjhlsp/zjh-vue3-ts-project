@@ -23,14 +23,14 @@
 import { Itab } from '@/store/type'
 import { computed, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useStore } from 'vuex';
+import { useStore } from '@/store';
 import { ElMessage } from 'element-plus'
 
 const route = useRoute()
 const store = useStore()
 const router = useRouter()
 const tabsList = computed(() => {
-  return store.getters.getAddTabs
+  return store.getters['tabStore/getAddTabs']
 })
 
 
@@ -44,7 +44,7 @@ const addTab = () => {
     path: path,
     title: meta.title as string
   }
-  store.commit('addTab', tab)
+  store.commit('tabStore/addTab', tab)
 }
 
 const refresh = () => {
@@ -57,7 +57,7 @@ const refresh = () => {
   let session = sessionStorage.getItem('TABS_ROUTERS')
   if (session) {
     JSON.parse(session).forEach((item:Itab) => {
-      store.commit('addTab', item)
+      store.commit('tabStore/addTab', item)
     });
   }
 }
@@ -92,7 +92,7 @@ const handleRemove = (event: string) => {
       }
     });
   }
-  store.commit('deleteTab', event)
+  store.commit('tabStore/deleteTab', event)
 
 }
 

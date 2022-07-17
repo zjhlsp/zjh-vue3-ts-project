@@ -1,29 +1,30 @@
-import { createStore } from 'vuex';
+import { createStore, useStore as baseUseStore, Store } from 'vuex';
 import { Itab } from './type';
-interface State {
-    tabsList: Array<Itab>
+import { InjectionKey } from 'vue'
+// store模块
+import {TabState, tabStore} from './model/tabs'
+import {LoginState, loginStore} from './model/login'
+
+// 定义 injection key
+export const key: InjectionKey<Store<State>> = Symbol()
+// export interface RootState 
+export interface RootState {
+    tabStore:TabState,
+    loginStore:LoginState,
 }
 
-export const store = createStore<State>({
-    state: {
-        tabsList: []
-    },
-    mutations: {
-        addTab (state:State, tab:Itab) {
-            const isSome = state.tabsList.some(item => item.path == tab.path)
-            !isSome && state.tabsList.push(tab)
-        },
-        deleteTab (state:State, tab:string) {
-            state.tabsList.forEach((value, index) => {
-                if (value.path === tab) {
-                    state.tabsList.splice(index, 1)
-                }
-            });
-        }
-    },
-    getters: {
-        getAddTabs (state:State) {
-            return state.tabsList
-        }
+export const store:Store<RootState> = createStore({
+    modules:{
+        tabStore,
+        loginStore
     }
 })
+
+interface State {
+    tabsList: Array<Itab>
+} 
+
+
+export function useStore () {
+    return baseUseStore(key)
+  }

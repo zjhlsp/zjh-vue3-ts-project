@@ -64,6 +64,7 @@
 <script setup lang='ts'>
 import { onMounted, reactive, ref } from 'vue';
 import { loginAPI } from '@/api/login'
+import { useStore } from '@/store';
 
 const formData = reactive({
   username: '',
@@ -88,17 +89,17 @@ const formValidator = reactive({
 
 const loginForm = ref()
 const codeUrl = ref<string>('')
+const store = useStore()
 
 onMounted(() => {
   getValidaCode()
 })
 // 登录
 const login = () => {
-  loginForm.value.validate((value: boolean) => {
+    loginForm.value.validate((value: boolean) => {
     if (value) {
-      loginAPI.accountLogin(formData).then((res) => {
-        console.log(res);
-      })
+      store.dispatch('loginStore/login', formData)
+      getValidaCode()
     }
   })
 }

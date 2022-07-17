@@ -15,7 +15,7 @@ const CONFIG: AxiosRequestConfig<any> = {
 const $axios = axios.create(CONFIG)
 
 // response 拦截器
-$axios.interceptors.response.use(response=>{
+$axios.interceptors.response.use((response)=>{
     const res = response.data
     if(res.code === 200) {
         return res

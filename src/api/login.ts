@@ -8,7 +8,7 @@ const getVerifyCode = () => {
     })
 }
 
-// 用户登录
+// 用户登录(账户密码登录)
 const accountLogin = (data:object) => {
     return $axios({
         url: '/auth/login',
@@ -17,7 +17,16 @@ const accountLogin = (data:object) => {
     })
 }
 
+// token登录
+const tokenLogin = (token: string) => {
+    return $axios({
+        url: `/auth/loginByToken?token=${token}`,
+        method: 'POST'
+    })
+}
+
 export const loginAPI = {
     getVerifyCode,
-    accountLogin
+    accountLogin,
+    tokenLogin
 }

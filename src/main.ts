@@ -1,11 +1,11 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router/index'
-import { store } from '../src/store/index';
+import { store, key } from '../src/store/index';
 import * as ElIcons from '@element-plus/icons'
-
+import 'element-plus/theme-chalk/el-message.css'
 const app = createApp(App)
-app.use(store)
+app.use(store, key)
 app.use(router)
 app.mount('#app')
 
