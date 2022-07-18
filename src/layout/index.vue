@@ -7,15 +7,13 @@
       </el-aside>
       <el-container>
         <el-header>
-          <el-row>
-            <el-icon
-              style="font-size: 20px; margin-right: 16px;"
-              @click="() => { collapsed = !collapsed }"
-            >
-              <component :is="collapsed ? Expand : Fold" />
-            </el-icon>
-            <HeaderBar style="margin-top: 3px;" />
-          </el-row>
+          <el-icon
+            style="font-size: 20px; margin-right: 16px;"
+            @click="() => { collapsed = !collapsed }"
+          >
+            <component :is="collapsed ? Expand : Fold" />
+          </el-icon>
+          <HeaderBar style="margin-top: 3px;" />
         </el-header>
         <el-main>
           <TabBar />
@@ -55,6 +53,10 @@ const collapsed = ref<boolean>(false)
     display: flex;
     align-items: center;
     background-color: $lightGray;
+  }
+  .header {
+    display: flex;
+    justify-content: space-between;
   }
 }
 </style>

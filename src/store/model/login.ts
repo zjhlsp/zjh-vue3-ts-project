@@ -45,6 +45,8 @@ export const loginStore: Module<LoginState, RootState> = {
                 router.push({ path: '/index' })
                 //本地存储token
                 localStorage.setItem('TOKEN', res.data.token)
+                localStorage.setItem('USERNAME', res.data.username)
+
             })
         },
 
@@ -56,6 +58,7 @@ export const loginStore: Module<LoginState, RootState> = {
                 commit('addUserInfo', res.data)
                 //本地存储token
                 localStorage.setItem('TOKEN', res.data.token)
+                localStorage.setItem('USERNAME', res.data.username)
                 if (res.data.status) {
                     router.push({ path: '/index' })
                 }

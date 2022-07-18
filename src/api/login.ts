@@ -25,8 +25,17 @@ const tokenLogin = (token: string) => {
     })
 }
 
+// 登出账户
+const Logout = () => {
+    return $axios({
+        url:'/auth/logout',
+        method:'DELETE'
+    })
+}
+
 export const loginAPI = {
     getVerifyCode,
     accountLogin,
-    tokenLogin
+    tokenLogin,
+    Logout
 }

@@ -208,11 +208,11 @@ router.beforeEach((to,from,next) => {
   } else if (!store.state.loginStore.token && token) {
     loginAPI.tokenLogin(token).then((res) => {
       if (res.data.status) {
-        store.commit('loginStore/addUserInfo')
+        store.commit('loginStore/addUserInfo', res.data)
         next()
       } else next('/login')
     })
-  }
+  } else next()
 })
 
 export default router
