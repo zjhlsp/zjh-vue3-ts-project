@@ -13,7 +13,7 @@
         :name="item.path"
         closable
       >
-        {{ item.title }}
+        <!-- {{ item.title }} -->
       </el-tab-pane>
     </el-tabs>
   </div>

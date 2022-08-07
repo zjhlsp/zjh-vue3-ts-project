@@ -13,7 +13,18 @@ const CONFIG: AxiosRequestConfig<any> = {
 }
 
 const $axios = axios.create(CONFIG)
-
+// request拦截器
+$axios.interceptors.request.use(requestInfo=>{
+    if(requestInfo.headers) {
+        requestInfo.headers['token'] = localStorage.getItem('TOKEN') || '0'
+        requestInfo.headers['Content-Type'] = 'application/json;charset=UTF-8'
+        return requestInfo
+    }
+    
+},
+error=>{
+     return Promise.reject(error)   
+})
 // response 拦截器
 $axios.interceptors.response.use((response)=>{
     const res = response.data
