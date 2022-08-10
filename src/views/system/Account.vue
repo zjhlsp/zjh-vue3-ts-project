@@ -1,6 +1,14 @@
 <!--  -->
 <template>
   <div class="userTable">
+    <div style="text-align: left; margin: 5px 10px;">
+      <el-button
+        type="primary"
+        @click="addUser"
+      >
+        新增用户
+      </el-button>
+    </div>
     <el-table
       :data="state.tableData"
       style="width: 100%"
@@ -15,13 +23,13 @@
         label="角色"
         width="120"
       />
-      <el-table-column
-        label="状态"
-      >
-        <!-- :before-change="changeStatus(scope.row.status, scope.row.id)" -->
+      <el-table-column label="状态">
         <template #default="scope">
           <el-switch
             v-model="scope.row.status"
+            active-color="green"
+            inactive-color="red"
+            @change="(value:boolean)=> changeStatus(value,scope.row.id)"
           />
         </template>
       </el-table-column>
@@ -58,18 +66,34 @@
         </template>
       </el-table-column>
     </el-table>
+    <AddOrEditUser
+      :value="state.showDialog"
+      :is-edit="state.isEdit"
+      @close-dialog="state.showDialog = false"
+      @refresh="getTableList"
+    />
   </div>
 </template>
 
 <script setup lang='ts'>
 import { userAPI } from '@/api/system/user';
-import { ElMessage } from 'element-plus';
-import { onMounted, reactive, ref } from 'vue';
+import { ElMessage,ElMessageBox } from 'element-plus';
+import { onMounted, reactive } from 'vue';
+// 引入组件
+import AddOrEditUser from './component/AddOrEditUser.vue';
+
 onMounted(() => {
   getTableList()
 })
+
 const state = reactive({
-  tableData: [] // table数据
+  tableData: [], // table数据
+  showDialog: false,
+  users:[],
+  currentPage:1,
+  pageSize:10,
+  isEdit:false
+  
 })
 
 // 获取列表数据
@@ -78,6 +102,7 @@ const getTableList = () => {
     state.tableData = res.data;
   })
 }
+
 // 改变用户状态
 const changeStatus = (status: boolean, sysUserId: number) => {
   return new Promise<void>((resolve, reject) => {
@@ -89,6 +114,23 @@ const changeStatus = (status: boolean, sysUserId: number) => {
     })
   })
 }
+
+// 添加用户
+const addUser = () => {
+  state.isEdit = false
+  state.showDialog = true
+}
+
+// 删除用户
+const deleteUser = (id:number)=>{
+    ElMessageBox.confirm('确认要删除当前用户吗?').then(()=>{
+      userAPI.deleteSysUsers(id).then(()=>{
+        ElMessage.success('删除成功')
+        getTableList()
+      })
+    })
+}
+
 </script>
 <style lang='scss' scoped>
 </style>

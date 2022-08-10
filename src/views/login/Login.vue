@@ -99,7 +99,7 @@ const login = () => {
     loginForm.value.validate((value: boolean) => {
     if (value) {
       store.dispatch('loginStore/login', formData)
-      // getValidaCode()
+      getValidaCode()
     }
   })
 }
