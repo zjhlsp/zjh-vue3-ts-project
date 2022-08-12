@@ -29,7 +29,7 @@
             v-model="scope.row.status"
             active-color="green"
             inactive-color="red"
-            @change="(value:boolean)=> changeStatus(value,scope.row.id)"
+            @change="(value: boolean) => changeStatus(value, scope.row.id)"
           />
         </template>
       </el-table-column>
@@ -52,7 +52,7 @@
           <el-button
             type="text"
             size="small"
-            @click="toEditUser(scope.row)"
+            @click="editUser(scope.row)"
           >
             编辑
           </el-button>
@@ -69,6 +69,7 @@
     <AddOrEditUser
       :value="state.showDialog"
       :is-edit="state.isEdit"
+      :user-info="state.userInfo"
       @close-dialog="state.showDialog = false"
       @refresh="getTableList"
     />
@@ -77,10 +78,19 @@
 
 <script setup lang='ts'>
 import { userAPI } from '@/api/system/user';
-import { ElMessage,ElMessageBox } from 'element-plus';
+import { ElMessage, ElMessageBox } from 'element-plus';
 import { onMounted, reactive } from 'vue';
 // 引入组件
 import AddOrEditUser from './component/AddOrEditUser.vue';
+
+interface USERINFO {
+  depId?: string | number
+  id?: number
+  roleId?: number
+  roleName?: string
+  status?: boolean
+  username?: string
+}
 
 onMounted(() => {
   getTableList()
@@ -89,12 +99,14 @@ onMounted(() => {
 const state = reactive({
   tableData: [], // table数据
   showDialog: false,
-  users:[],
-  currentPage:1,
-  pageSize:10,
-  isEdit:false
-  
+  users: [],
+  currentPage: 1,
+  pageSize: 10,
+  isEdit: false,
+  userInfo: {}
 })
+
+// const userInfo:USERINFO = reactive({})
 
 // 获取列表数据
 const getTableList = () => {
@@ -121,14 +133,21 @@ const addUser = () => {
   state.showDialog = true
 }
 
+// 修改用户
+const editUser = (row: USERINFO) => {
+  state.isEdit = true
+  state.showDialog = true
+  state.userInfo = row
+}
+
 // 删除用户
-const deleteUser = (id:number)=>{
-    ElMessageBox.confirm('确认要删除当前用户吗?').then(()=>{
-      userAPI.deleteSysUsers(id).then(()=>{
-        ElMessage.success('删除成功')
-        getTableList()
-      })
+const deleteUser = (id: number) => {
+  ElMessageBox.confirm('确认要删除当前用户吗?').then(() => {
+    userAPI.deleteSysUsers(id).then(() => {
+      ElMessage.success('删除成功')
+      getTableList()
     })
+  })
 }
 
 </script>

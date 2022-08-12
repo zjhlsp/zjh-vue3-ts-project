@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-mutating-props -->
 <template>
   <el-dialog
     v-model="value"
@@ -35,7 +36,7 @@
 <script setup lang='ts'>
 import { userAPI } from '@/api/system/user';
 import { ElMessage } from 'element-plus';
-import { reactive, ref } from 'vue';
+import { reactive, ref, watch } from 'vue';
 
 const props = defineProps({
     value: {
@@ -49,11 +50,24 @@ const props = defineProps({
         default() {
             return true
         }
+    },
+    userInfo: {
+      type: Object,
+      default() {
+        return{}
+      }
     }
 })
 
 const emit = defineEmits(['closeDialog', 'refresh'])
 
+watch( () => props.value, () => {
+  if (props.value) {
+    props.isEdit && (state.formData = props.userInfo as {username:string})
+  } else {
+    state.formData = {username:''}
+  }
+})
 const state = reactive({
     formData: {
         username: ''
