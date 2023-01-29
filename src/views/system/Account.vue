@@ -38,13 +38,6 @@
           <el-button
             type="text"
             size="small"
-            @click="toSetRole(scope.row.id)"
-          >
-            授权
-          </el-button>
-          <el-button
-            type="text"
-            size="small"
             @click="resetPw(scope.row.id)"
           >
             重置密码
@@ -138,6 +131,16 @@ const editUser = (row: USERINFO) => {
   state.isEdit = true
   state.showDialog = true
   state.userInfo = row
+}
+
+// 重置密码
+const resetPw = (id: number) => {
+    ElMessageBox.confirm('确认要重置当前用户吗?').then(() => {
+    userAPI.resetPassword(id).then(() => {
+      ElMessage.success('重置成功')
+      getTableList()
+    })
+  })
 }
 
 // 删除用户

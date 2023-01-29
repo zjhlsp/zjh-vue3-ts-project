@@ -21,6 +21,22 @@
           placeholder="请输入用户名"
         />
       </el-form-item>
+      <el-form-item
+        label="角色："
+        prop="roleId"
+      >
+        <el-select
+          v-model="state.formData.roleId"
+          placeholder="请选择角色（虚拟）"
+        >
+          <el-option
+            v-for="item in state.roles"
+            :key="item.id"
+            :label="item.name"
+            :value="item.id"
+          />
+        </el-select>
+      </el-form-item>
     </el-form>
     <template #footer>
       <span class="dialog-footer">
@@ -60,19 +76,26 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['closeDialog', 'refresh'])
-
 watch( () => props.value, () => {
   if (props.value) {
-    props.isEdit && (state.formData = props.userInfo as {username:string})
+    props.isEdit && (state.formData = props.userInfo as {username:string, roleId: number })
+    console.log(props.userInfo);
   } else {
-    state.formData = {username:''}
+    state.formData = {username:'', roleId: 1}
   }
 })
+// 表单数据以及校验
 const state = reactive({
     formData: {
-        username: ''
+        username: '',
+        roleId: 1
         // password: ''
     },
+    roles: [
+      { id: 1, name: '超级管理员'},
+      { id: 2, name: '后台管理员'},
+      { id: 3, name: '游客'}
+    ],
     validateForm: {
         username: [
             {
