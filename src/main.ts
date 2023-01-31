@@ -10,6 +10,15 @@ app.use(store, key)
 app.use(router)
 app.mount('#app')
 
+// 自定义指令
+app.directive('hide', {
+    mounted(el, binding) {
+        const arr = ['a', 'b', 'c']
+        if (!arr.includes(binding.value)) {
+            el.parentNode.removeChild(el)
+        }
+    }
+})
 for(const name in ElIcons ) {
     app.component(name,(ElIcons as any)[name])
 }
