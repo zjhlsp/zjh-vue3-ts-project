@@ -1,8 +1,16 @@
 
 import {createRouter,createWebHashHistory,RouteRecordRaw} from 'vue-router'
-import Layout from '@/layout/index.vue'
+// import Layout from '@/layout/index.vue'
 import { store } from '@/store'
 import { loginAPI } from '@/api/login'
+
+declare module 'vue-router' {
+  interface RouteMeta {
+    title:string,
+    icon?:string,
+    permission:string
+  }
+}
 
 const routes:Array<RouteRecordRaw> = [
   {
@@ -29,8 +37,14 @@ router.beforeEach((to,from,next) => {
   } else if (!store.state.loginStore.token && token) {
     loginAPI.tokenLogin(token).then((res) => {
       console.log(res);
-      if (res.data.status) {
+        store.dispatch('menuStore/generateSystemMenus', res.data.permissions)
+        if (res.data.status) {
         store.commit('loginStore/addUserInfo', res.data)
+
+        // 如果没有加载好路由，重新加载一次
+        if (to.matched.length === 0) {
+          router.push(to.path)
+        }
         next()
       } else next('/login')
     })

@@ -2,6 +2,7 @@ import { RootState } from '../index';
 import { Module } from 'vuex';
 import { loginAPI } from '@/api/login';
 import router from '@/router';
+import { store } from '@/store'
 
 
 export interface LoginState {
@@ -42,8 +43,9 @@ export const loginStore: Module<LoginState, RootState> = {
             loginAPI.accountLogin(loginParams).then((res) => {
                 commit('addToken', res.data.token)
                 commit('addUserInfo', res.data)
+                store.dispatch('menuStore/generateSystemMenus', res.data.permissions)
                 router.push({ path: '/index' })
-                //本地存储token
+        //本地存储token
                 localStorage.setItem('TOKEN', res.data.token)
                 localStorage.setItem('USERNAME', res.data.username)
 
@@ -59,6 +61,7 @@ export const loginStore: Module<LoginState, RootState> = {
                 //本地存储token
                 localStorage.setItem('TOKEN', res.data.token)
                 localStorage.setItem('USERNAME', res.data.username)
+                store.dispatch('menuStore/generateSystemMenus', res.data.permissions)
                 if (res.data.status) {
                     router.push({ path: '/index' })
                 }
