@@ -4,6 +4,7 @@ import { InjectionKey } from 'vue'
 // store模块
 import {TabState, tabStore} from './model/tabs'
 import {LoginState, loginStore} from './model/login'
+import {MenuState, menuStore} from './model/menu'
 
 // 定义 injection key
 export const key: InjectionKey<Store<State>> = Symbol()
@@ -11,12 +12,14 @@ export const key: InjectionKey<Store<State>> = Symbol()
 export interface RootState {
     tabStore:TabState,
     loginStore:LoginState,
+    menuStore: MenuState
 }
 
 export const store:Store<RootState> = createStore({
     modules:{
         tabStore,
-        loginStore
+        loginStore,
+        menuStore
     }
 })
 
