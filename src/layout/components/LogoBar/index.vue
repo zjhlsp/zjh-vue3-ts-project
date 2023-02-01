@@ -3,13 +3,14 @@
     class="logo"
   >
     <img
-      src="@/assets/JOE.png"
+      style="height: 60px; width: 60px"
+      src="@/assets/logo.jpg"
     >
     <span
       v-show="!collapsed"
       class="title"
     >
-      JOE
+      山野食堂
     </span>
   </div>
 </template>
@@ -28,7 +29,6 @@ defineProps({
 .logo {
   display:flex;
   align-items:center;
-  height: 64px;
   overflow: hidden;
   white-space: nowrap;
   background-color: $lightGray;

@@ -15,7 +15,7 @@
           </el-icon>
           <HeaderBar style="margin-top: 3px;" />
         </el-header>
-        <el-main>
+        <el-main class="main">
           <TabBar />
           <AppMain />
         </el-main>
@@ -37,11 +37,15 @@ import TabBar from './components/TabBar/TabBar.vue'
 const collapsed = ref<boolean>(false)
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .common-layout {
   height: 100vh;
   display: flex;
   overflow: hidden;
+
+  .main {
+    padding:0%
+  }
 
   .el-aside {
     overflow: hidden;
