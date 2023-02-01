@@ -1,5 +1,5 @@
 <template>
-  <div>index</div>
+  <div>{{ $t('menus.wIndex') }}</div>
 </template>
 <script setup lang='ts'>
 </script>

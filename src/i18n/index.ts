@@ -13,7 +13,7 @@ const message = {
 }
 const i18n = createI18n({
     legacy: false, // vue3中需要为false
-    locale: 'chs', // 当前语言
+    locale: localStorage.getItem('Lang') || 'chs', // 当前语言
     globalInjection: true, // 全局可通过$t来控制字符串切换中英文
     messages: message
 })
