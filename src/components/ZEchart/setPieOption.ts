@@ -1,7 +1,24 @@
+interface optionData {
+    title: string, // 标题
+    legendX: string, // 图例位置
+    legendY: string // 图例位置
+
+}
+interface seriesData {
+    seriesName: string, // 数据名称
+    seriesData: series[] // 图表数据
+    legendData?: string[] // 图例
+}
+interface series {
+    name: string, // 单个数据名称
+    value: number // 单个数据值
+}
+// 传参optionData：图表标题、样式设置
+// 传参seriesData：
 export const setPieOption = (
-    optionData:any,
-    seriesData:any) => {
-    const option:any = {
+    optionData:optionData,
+    seriesData:seriesData) => {
+    const option = {
         grid: {
             left: '1%',
             right: '2%',
