@@ -67,8 +67,11 @@ refresh()
 
 //再监听路由
 watch(() => route.path, () => {
-  addTab()
-  activeKey.value = route.path
+  if (route.path !== '/login') {
+    addTab()
+    activeKey.value = route.path
+  }
+
 },{immediate: true})
 
 const handleClick = (event:any) => {
