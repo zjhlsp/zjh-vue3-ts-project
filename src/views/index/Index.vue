@@ -23,10 +23,24 @@
         </div>
       </el-col>
     </el-row>
+    <el-row style="margin-top: 20px;">
+      <el-col :span="12">
+        <div class="pic">
+          <LineChart />
+        </div>
+      </el-col>
+      <el-col :span="12">
+        <div class="pic">
+          <BarChartTo />
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 <script setup lang='ts'>
 import ZEchart from '../../components/ZEchart/ZEchart.vue';
+import LineChart from './LineChart.vue'
+import BarChartTo from './BarChartTo.vue';
 import { reactive } from 'vue';
 
 const barData = reactive({
@@ -51,7 +65,7 @@ const pieData = reactive({
   padding: 16px;
 }
 .pic {
-  height: 300px;
+  height: 400px;
   margin-right: 16px;
 }
 </style>
