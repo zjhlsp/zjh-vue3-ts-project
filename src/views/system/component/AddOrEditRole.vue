@@ -6,31 +6,13 @@
     :title="isEdit ? '编辑角色' : '新增角色'"
     @close="$emit('closeDialog')"
   >
-    <el-form
+    <Form
       ref="form"
+      :data-items="state.dataItem"
       label-width="auto"
-      :model="state.formData"
+      :form-data="state.formData"
       :rules="state.validateForm"
-    >
-      <el-form-item
-        label="角色名："
-        prop="name"
-      >
-        <el-input
-          v-model="state.formData.name"
-          placeholder="请输入用户名"
-        />
-      </el-form-item>
-      <el-form-item
-        label="描述"
-        prop="description"
-      >
-        <el-input
-          v-model="state.formData.description"
-          placeholder="请输入用户名"
-        />
-      </el-form-item>
-    </el-form>
+    />
     <template #footer>
       <span class="dialog-footer">
         <el-button @click="$emit('closeDialog')">取消</el-button>
@@ -46,6 +28,7 @@
 import { roleAPI } from '@/api/system/role';
 import { ElMessage } from 'element-plus';
 import { reactive, ref, watch } from 'vue';
+import Form from '@/components/MyForm/Form.vue';
 
 const props = defineProps({
     value: {
@@ -84,6 +67,10 @@ const state = reactive({
         description: ''
         // password: ''
     },
+    dataItem: [
+      {id: 'name', itemType: 'input', place: '请输入用户名', label: '角色名：'},
+      {id: 'description', itemType: 'input', place: '请输入描述', label: '描述：'}
+    ],
     validateForm: {
         name: [
             {
