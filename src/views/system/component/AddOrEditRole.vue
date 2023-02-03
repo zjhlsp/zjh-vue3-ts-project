@@ -9,7 +9,7 @@
     <Form
       ref="form"
       :data-items="state.dataItem"
-      label-width="auto"
+      label-width="100px"
       :form-data="state.formData"
       :rules="state.validateForm"
     />
@@ -77,6 +77,8 @@ const state = reactive({
         name: [
             {
                 validator: validateRules,
+                required: true,
+                label: '角色名',
                 rules: {
                   required: true,
                   length: [1,16],

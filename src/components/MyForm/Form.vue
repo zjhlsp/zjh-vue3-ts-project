@@ -1,7 +1,7 @@
 <template>
   <el-form
     ref="form"
-    label-width
+    :label-width="labelWidth || 'auto'"
     :label-position="labelPosition"
     :rules="rules"
     :model="formData"
