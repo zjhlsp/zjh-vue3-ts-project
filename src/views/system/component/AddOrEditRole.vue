@@ -28,8 +28,10 @@
 import { roleAPI } from '@/api/system/role';
 import { ElMessage } from 'element-plus';
 import { reactive, ref, watch } from 'vue';
+// 引入封装的表单组件
 import Form from '@/components/MyForm/Form.vue';
-
+// 引入校验文件
+import validateRules from '@/components/MyForm/formValidate'
 const props = defineProps({
     value: {
         type: Boolean,
@@ -74,8 +76,12 @@ const state = reactive({
     validateForm: {
         name: [
             {
-                required: true,
-                message: '请输入角色名',
+                validator: validateRules,
+                rules: {
+                  required: true,
+                  length: [1,16],
+                  reg: 'IP'
+                },
                 trigger: 'blur'
             }
         ]
