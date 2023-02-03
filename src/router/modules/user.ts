@@ -10,7 +10,7 @@ const userRouter:RouteRecordRaw = {
     meta: {
       title: 'menus.wUserManger',
       icon:'UserFilled',
-      permission: 'system:user'
+      permission: 'system:userhide'
     },
     children: [
       {

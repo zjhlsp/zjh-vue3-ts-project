@@ -36,14 +36,15 @@ const systemRouter:RouteRecordRaw =  {
           permission: 'system:admin:role'
         }
         
-      }, {
+      }, 
+      {
         path:'task',
         name:'task',
         component:() => import('@/views/system/Task.vue'),
         meta:{
           title:'menus.wSystemTask',
           icon:'Clock',
-          permission: 'system:admin:timingTask'
+          permission: 'system:admin:timingTask:hide'
         }
         
 
