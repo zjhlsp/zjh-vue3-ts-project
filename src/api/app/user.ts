@@ -1,24 +1,24 @@
-import axiosInstance from "../axios";
+import axiosInstance from '../axios';
 
 //
 
 
 // 分页查询
 export function getUserAdmins(pageNo:number, pageSize:number){
-  let url = "/userAdmin/page?pageNo=";
-  url = url + (pageNo ? pageNo : "");
-  url = url + "&pageSize=" + (pageSize ? pageSize : "");
+  let url = '/userAdmin/page?pageNo=';
+  url = url + (pageNo ? pageNo : '');
+  url = url + '&pageSize=' + (pageSize ? pageSize : '');
   return axiosInstance({
     url: url,
-    method: "get"
+    method: 'get'
   })
 }
 
 // 添加
 export function addUserAdmin(userAdmin:object) {
   return axiosInstance({
-    url: "/userAdmin",
-    method: "post",
+    url: '/userAdmin',
+    method: 'post',
     data: userAdmin
   })
 }
@@ -26,8 +26,8 @@ export function addUserAdmin(userAdmin:object) {
 // 更新
 export function updateUserAdmin(userAdmin:object) {
   return axiosInstance({
-    url: "/userAdmin",
-    method: "put",
+    url: '/userAdmin',
+    method: 'put',
     data: userAdmin
   })
 }
@@ -35,8 +35,8 @@ export function updateUserAdmin(userAdmin:object) {
 // 批量删除
 export function deleteUserAdmins(userAdminId:string[]) {
   return axiosInstance({
-    url: "/userAdmin/" + userAdminId,
-    method: "delete",
+    url: '/userAdmin/' + userAdminId,
+    method: 'delete',
     data: userAdminId
   })
 }

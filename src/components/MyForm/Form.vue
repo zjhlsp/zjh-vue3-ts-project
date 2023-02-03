@@ -86,7 +86,7 @@ import type { FormInstance, FormRules, FormValidateCallback } from 'element-plus
 import { ref } from 'vue';
 
 interface itemData {
-    id: string,
+    id?: string,
     title?: string,
     label?: string,
     place?: string,

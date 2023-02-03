@@ -123,8 +123,8 @@ const validateRules = (rule: any, value: string, callback: Function) => {
      * @param {number} type 0 1 表示整数
      * @returns 校验信息
      */
-    int (value: string, type: number) {
-        type = Number(type)
+    int (value: string, type: boolean | number) {
+        type = type ? 1 : 0
         // value = Number(value)
         const map = [
             { reg: /^-[1-9]\d*$/, msg: '请输入负整数' },

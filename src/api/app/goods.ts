@@ -1,16 +1,16 @@
-import axiosInstance from "../axios";
-import type { goodsType,goodsPropertyType } from "@/views/goods/goodType";
+import axiosInstance from '../axios';
+import type { goodsType,goodsPropertyType } from '@/views/goods/goodType';
 
 
 
 // 分页查询
 export function getGoodsAdmins(pageNo:number, pageSize:number){
-  let url = "/goodsAdmin/page?pageNo=";
-  url = url + (pageNo ? pageNo : "");
-  url = url + "&pageSize=" + (pageSize ? pageSize : "");
+  let url = '/goodsAdmin/page?pageNo=';
+  url = url + (pageNo ? pageNo : '');
+  url = url + '&pageSize=' + (pageSize ? pageSize : '');
   return axiosInstance({
     url: url,
-    method: "get"
+    method: 'get'
   })
 }
 
@@ -18,16 +18,16 @@ export function getGoodsAdmins(pageNo:number, pageSize:number){
 // 根据商品id查询
 export function getGoodsAdminById(goodsId:number){
   return axiosInstance({
-    url: "/goodsAdmin/" +goodsId,
-    method: "get"
+    url: '/goodsAdmin/' +goodsId,
+    method: 'get'
   })
 }
 
 // 添加
 export function addGoodsAdmin(goodsAdmin:goodsType) {
   return axiosInstance({
-    url: "/goodsAdmin",
-    method: "post",
+    url: '/goodsAdmin',
+    method: 'post',
     data: goodsAdmin
   })
 }
@@ -35,8 +35,8 @@ export function addGoodsAdmin(goodsAdmin:goodsType) {
 // 更新
 export function updateGoodsAdmin(goodsAdmin:goodsType) {
   return axiosInstance({
-    url: "/goodsAdmin",
-    method: "put",
+    url: '/goodsAdmin',
+    method: 'put',
     data: goodsAdmin
   })
 }
@@ -44,16 +44,16 @@ export function updateGoodsAdmin(goodsAdmin:goodsType) {
 // 上架或下架商品
 export function updateSellStatus(goodsId:number) {
   return axiosInstance({
-    url: "/goodsAdmin/updateSellStatus/" + goodsId,
-    method: "put"
+    url: '/goodsAdmin/updateSellStatus/' + goodsId,
+    method: 'put'
   })
 }
 
 // 批量删除
 export function deleteGoodsAdmins(goodsAdminIdList:number[]) {
   return axiosInstance({
-    url: "/goodsAdmin/batch",
-    method: "delete",
+    url: '/goodsAdmin/batch',
+    method: 'delete',
     data: goodsAdminIdList
   })
 }
@@ -63,16 +63,16 @@ export function deleteGoodsAdmins(goodsAdminIdList:number[]) {
 // 设置商品的默认属性
 export function setDefaultPropertyOfGoods(goodsPropertyId:number){
   return axiosInstance({
-    url: "/goodsPropertyAdmin/setDefault/" + goodsPropertyId,
-    method: "put"
+    url: '/goodsPropertyAdmin/setDefault/' + goodsPropertyId,
+    method: 'put'
   })
 }
 
 // 添加商品属性
 export function addGoodsProperty(goodsProperty:goodsPropertyType) {
   return axiosInstance({
-    url: "/goodsPropertyAdmin",
-    method: "post",
+    url: '/goodsPropertyAdmin',
+    method: 'post',
     data: goodsProperty
   })
 }
@@ -80,8 +80,8 @@ export function addGoodsProperty(goodsProperty:goodsPropertyType) {
 // 更新商品属性
 export function updateGoodsProperty(goodsProperty:goodsPropertyType) {
   return axiosInstance({
-    url: "/goodsPropertyAdmin",
-    method: "put",
+    url: '/goodsPropertyAdmin',
+    method: 'put',
     data: goodsProperty
   })
 }
@@ -90,7 +90,7 @@ export function updateGoodsProperty(goodsProperty:goodsPropertyType) {
 // 批量商品属性
 export function deleteGoodsProperty(goodsPropertyId:number) {
   return axiosInstance({
-    url: "/goodsPropertyAdmin/" + goodsPropertyId,
-    method: "delete"
+    url: '/goodsPropertyAdmin/' + goodsPropertyId,
+    method: 'delete'
   })
 }
