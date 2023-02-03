@@ -11,7 +11,7 @@ const orderRouter:RouteRecordRaw =  {
     meta: {
       title: 'menus.wOrderManger',
       icon: 'Notebook',
-      permission: 'system:order'
+      permission: 'system:order:hide'
     },
     
     children: [
@@ -33,7 +33,7 @@ const orderRouter:RouteRecordRaw =  {
         meta: {
           title: 'menus.wOrderAction',
           icon: 'Money',
-          permission: 'system:order:orderManage'
+          permission: 'system:order:orderManage:hide'
         }
         
       }

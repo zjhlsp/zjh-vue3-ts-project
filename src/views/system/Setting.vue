@@ -14,7 +14,7 @@
       <el-button
         @click="() => {state.status = state.status === 'edit' ? 'read' : 'edit'}"
       >
-        {{ state.status === 'edit' ? '保存' : '编辑' }}
+        {{ state.status === 'edit' ? '保存(演示用，不下发接口)' : '编辑' }}
       </el-button>
     </div>
   </div>
