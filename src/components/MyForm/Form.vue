@@ -63,7 +63,7 @@
         <el-button
           v-else-if="item.itemType==='button'"
           :type="item.type"
-          @click="(val:FormInstance) => {item.onClick(val)}"
+          @click="item.onClick"
         >
           {{ item.label }}
         </el-button>
